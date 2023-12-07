@@ -1,0 +1,134 @@
+/* import poppings font from google font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.modal-container {
+    font-family: Poppins, sans-serif;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    position: relative;
+    width: max-content;
+    max-width: 55%;
+    height: auto;
+    background-color: #000;
+    color: #eee;
+    border-radius: 15px;
+}
+
+.modal-header, .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    padding: 20px;
+    gap: 20px;
+}
+
+.modal-header {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.modal-footer {
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.modal-body {
+    padding: 5% 3%;
+}
+
+.modal-body-capture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    gap: 20px;
+}
+
+.modal-body-capture > video {
+    max-width: 50% ;
+}
+
+
+.modal-body-pincode {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-body-pincode h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-body-pincode .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.modal-body-pincode .grid div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #2a2a2a;
+    color: #eee;
+    font-size: 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+.modal-body-pincode .grid div:hover {
+    background-color: #333;
+}
+
+.modal-body-pincode input#pincode {
+    display: none;
+}
+
+.modal-body-pincode input#passwordInput {
+    margin-top: 20px;
+    align-self: center;
+    width: 35%;
+    padding: 1%;
+    padding-top: 2%;
+    border-radius: 5px;
+    background-color: #333;
+    border: 1px solid #222;
+    font-size: 1.75rem;
+    text-align: center;
+    color: #eee;
+    /* display '*' for each character*/
+    letter-spacing: 0.5rem;
+    /* user cant focus in input */
+    pointer-events: none;
+}
+
+.modal-body-capture-info div {
+    gap: 10px;
+}
+
+.modal-body-capture-info img {
+    width: 50%;
+}
+
+.modal-body-capture-info img.checked {
+    width: 40%;
+}
