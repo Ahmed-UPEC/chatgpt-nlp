@@ -88,7 +88,7 @@ const copyResponse = (copyBtn) => {
     const reponseTextElement = div.parentElement.querySelector("p");
     navigator.clipboard.writeText(reponseTextElement.textContent);
     copyBtn.textContent = "done";
-    setTimeout(() => copyBtn.textContent = "content_copy", 1000);
+    setTimeout(() => copyBtn.textContent = "content_copy", 2000);
     addSmallPopUp("Copy to Clipboard", "blue")
 }
 
@@ -121,12 +121,13 @@ const getQ_A = async (copyBtn) => {
         })
     }
 
-    setTimeout(() => copyBtn.remove(), 1000);
+    setTimeout(() => copyBtn.remove(), 2000);
 
     if (feedback == "Dislike") {
         copyBtn.classList.add("material-symbols-outlined");
         copyBtn.classList.remove("material-symbols-rounded");
         copyBtn.style.color = "red";
+        addSmallPopUp("Feedback saved", "red")
     }
 
     // Send POST request to API, get response and set the reponse as paragraph element text
@@ -141,10 +142,6 @@ const getQ_A = async (copyBtn) => {
         console.log(response);
     } catch (error) { // Add error class to the paragraph element and set error text
         console.log(error)
-    }
-
-    if (feedback == "Dislike") {
-        addSmallPopUp("Feedback saved", "red")
     }
 
 }
@@ -278,5 +275,5 @@ const addSmallPopUp = (text, color) => {
     // Create an outgoing chat div with user's message and append it to chat container
     const smallPopUp = createChatElement(html, "small-popup");
     typingContainer.appendChild(smallPopUp);
-    setTimeout(() => smallPopUp.remove(), 3000);
+    setTimeout(() => smallPopUp.remove(), 2000);
 }
