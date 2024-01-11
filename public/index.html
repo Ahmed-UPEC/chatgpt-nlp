@@ -7,30 +7,49 @@
     <!-- add icon -->
     <link rel="icon" href="images/chatbot.jpg">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/avatar.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Fonts Link For Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
     <script src="js/main.js" defer></script>
+    <script src="js/avatar.js" defer></script>
+
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="https://trulience.com/sdk/trulience.sdk.js"></script>
   </head>
   <body>
-    <!-- Chats container -->
-    <div class="chat-container"></div>
     
-    <!-- Typing container -->
-    <div class="typing-container">
-        <div class="typing-content">
-            <div class="typing-textarea">
-                <textarea id="chat-input" spellcheck="false" placeholder="Enter a prompt here" required></textarea>
-                <span id="send-btn" class="material-symbols-rounded">send</span>
-            </div>
-            <div class="typing-controls">
-                <span id="theme-btn" class="material-symbols-rounded">light_mode</span>
-                <span id="delete-btn" class="material-symbols-rounded">delete</span>
-            </div>
+    <section style="min-height: 100vh; max-height: 100vh; display: flex; flex-direction: column;">
+        <section class="chatbot-grid" style="flex-grow: 1;">
+          <div class="avatarPanel">
+            <!-- Avatar -->
+            <video webkit-playsinline playsinline crossorigin="use-credentials" id="myvideo" autoplay>
+            </video>
+          </div>
+          
+          <div>
+            <!-- Chats container -->
+            <div class="chat-container"></div>
+          </div>
+        </section>
+    
+        <!-- Typing container -->
+        <div class="typing-container">
+          <div class="typing-content">
+              <div class="typing-textarea">
+                  <textarea id="chat-input" spellcheck="false" placeholder="Enter a prompt here" required></textarea>
+                  <span id="send-btn" class="material-symbols-rounded">send</span>
+              </div>
+              <div class="typing-controls">
+                  <span id="theme-btn" class="material-symbols-rounded">light_mode</span>
+                  <span id="delete-btn" class="material-symbols-rounded">delete</span>
+                  <span id="avatar-btn" class="material-symbols-rounded">account_circle</span>
+              </div>
+          </div>
         </div>
-    </div>
+    </section>
 
   </body>
 </html>

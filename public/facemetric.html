@@ -16,6 +16,7 @@
     <canvas id="canvas" width="720" height="560"></canvas> -->
 
     <button id="facemetric_startprocess">Start Process</button>
+    <a href="https://web.dev/articles/passkey-registration" target="_blank">Google auth</a>
 
     <div class="modal-container">
         <div class="modal">
@@ -107,14 +108,50 @@
                         </div>
                     </div>
                     `
+
+                    
                 } 
                 else if (detections.length > 1) {
                     console.log('Multiple faces detected');
                     // Handle the case of multiple faces detected
+
+                    // hide canvas
+                    removeElementfromUI(canvas)
+                    // end stream
+                    stream.getTracks().forEach(function(track) {
+                        track.stop();
+                    });
+
+                    facemetric_modal_bod_capture_info.innerHTML = `
+                    <div style='display:flex'>
+                        <img src="images/face_loader.gif"/>
+                        <div style='display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:left'>
+                            <h2 style='text-align:center;'>Access denied</h2>
+                            <p style='text-align:center;'>Please try again</p>
+                        </div>
+                    </div>
+                    `
                 }
                 else {
                     console.log('No face detected');
                     // Handle the case where no face is detected
+
+                    // hide canvas
+                    removeElementfromUI(canvas)
+                    // end stream
+                    stream.getTracks().forEach(function(track) {
+                        track.stop();
+                    });
+
+                    facemetric_modal_bod_capture_info.innerHTML = `
+                    <div style='display:flex'>
+                        <img src="images/face_loader.gif"/>
+                        <div style='display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:left'>
+                            <h2 style='text-align:center;'>Unable to detect face</h2>
+                            <p style='text-align:center;'>Please try again</p>
+                        </div>
+                    </div>
+                    `
                 }
 
             }, 3000)
@@ -131,8 +168,8 @@
         }); */
 
         async function sendToFlask(imageData) {
-            //const url = "https://flask-python-2fjtj4bjkq-lm.a.run.app"
-            const url = "https://e5fe-2a01-cb04-72e-2c00-4939-f01a-4e52-cf05.ngrok.io"
+            const url = "https://flask-python-2fjtj4bjkq-lm.a.run.app"
+            //const url = "https://d67b-193-48-143-176.ngrok.io"
             fetch(url + "/faceapp", {
                 method: 'POST',
                 headers: {
