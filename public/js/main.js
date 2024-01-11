@@ -14,7 +14,7 @@ const FLASK_API_URL =
 const FLASK_API_URL_RENDER = "https://attendanceapi-i0pn.onrender.com"; // Flask API URL
 const RENDER_CHATBOT_API = "https://chatbot-retrival1.onrender.com"; // New API URL Chatbot
 
-const loadDataFromLocalstorage = async () => {
+const loadDataFromLocalstorage = () => {
   // Load saved chats and theme from local storage and apply/add on the page
   const themeColor = localStorage.getItem("themeColor");
 
@@ -30,7 +30,9 @@ const loadDataFromLocalstorage = async () => {
 
   chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
   chatContainer.scrollTo(0, chatContainer.scrollHeight); // Scroll to bottom of the chat container
+};
 
+const removeSessionID = async () => {
   // send api request to remove memory
   let sessionID = localStorage.getItem("sessionID");
   if (sessionID == null) {
@@ -305,9 +307,11 @@ const handleOutgoingChat = () => {
 
 deleteButton.addEventListener("click", () => {
   // Remove the chats from local storage and call loadDataFromLocalstorage function
-  if (confirm("Are you sure you want to delete all the chats?")) {
+  let bool = confirm("Are you sure you want to delete all the chats?") && localStorage.getItem("all-chats") != null;
+  if (bool) {
     localStorage.removeItem("all-chats");
     loadDataFromLocalstorage();
+    removeSessionID();
   }
 });
 
