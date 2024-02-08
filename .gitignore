@@ -66,3 +66,15 @@ node_modules/
 .env
 
 .github
+
+firebase.json
+.firebaserc
+/public/css/facemetric.css
+/public/models
+/public/models/*
+/public/facemetric.html
+/public/404.html
+/public/avatar.html
+/public/imageFace
+/public/imageFace/*
+/public/models.json

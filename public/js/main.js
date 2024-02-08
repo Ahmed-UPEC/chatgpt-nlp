@@ -25,7 +25,7 @@ const loadDataFromLocalstorage = () => {
 
   const defaultText = `<div class="default-text">
                             <h1>ChatGPT + NLP</h1>
-                            <p>Start a conversation and explore the power of AI.<br> Your chat history will be displayed here.<br> <strong style='opacity:0.05; margin-top:5px'>Credit : CodingNepal</strong></p>
+                            <p>Start a conversation and explore the power of AI.<br> Your chat history will be displayed here.<br> <strong style='opacity:0.1; margin-top:5px'>Credit : ASMS</strong></p>
                         </div>`;
 
   chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
@@ -140,6 +140,7 @@ const getChatResponse = async (incomingChatDiv) => {
       pElement.textContent = "Engine not available. Please try again later.";
     }
     pElement.textContent = response.text;
+    
     sendMessageToAvatar(response.text);
     console.log(response);
   } catch (error) {
@@ -292,7 +293,7 @@ const handleOutgoingChat = () => {
 
   const html = `<div class="chat-content">
                     <div class="chat-details">
-                        <img src="images/user.jpg" alt="user-img">
+                        <img src="images/ico.jpg" alt="user-img">
                         <p>${userText}</p>
                     </div>
                 </div>`;
@@ -307,7 +308,9 @@ const handleOutgoingChat = () => {
 
 deleteButton.addEventListener("click", () => {
   // Remove the chats from local storage and call loadDataFromLocalstorage function
-  let bool = confirm("Are you sure you want to delete all the chats?") && localStorage.getItem("all-chats") != null;
+  let bool =
+    confirm("Are you sure you want to delete all the chats?") &&
+    localStorage.getItem("all-chats") != null;
   if (bool) {
     localStorage.removeItem("all-chats");
     loadDataFromLocalstorage();
@@ -326,11 +329,6 @@ avatarButton.addEventListener("click", () => {
       "grid-template-columns: 3fr 2fr; flex-grow: 0.75;";
     // connect to Truliance API
     startCall();
-    setTimeout(() => {
-      sendMessageToAvatar(
-        "Hello there! I am your virtual assistant. How can I help you?"
-      );
-    }, 500);
   } else {
     document.querySelector(".chatbot-grid").style.cssText =
       "grid-template-columns: 1fr";
@@ -379,4 +377,9 @@ const addSmallPopUp = (text, color) => {
   const smallPopUp = createChatElement(html, "small-popup");
   typingContainer.appendChild(smallPopUp);
   setTimeout(() => smallPopUp.remove(), 2000);
+};
+
+window.onbeforeunload = function () {
+  localStorage.removeItem("all-chats");
+  localStorage.removeItem("sessionID");
 };

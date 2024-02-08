@@ -1,5 +1,27 @@
 var trulience = null;
-var avatarId = '10'; //Default Avatar Id 10 = ECHO_TEST
+var avatarId = '3987971816740702462'; //Default Avatar Id 10 = ECHO_TEST '3987971816740702462' = '10'
+
+let stream; 
+ 
+// Get the default microphone 
+navigator.mediaDevices.getUserMedia({ audio: true }) 
+  .then(function(mediaStream) { 
+    stream = mediaStream; 
+    // Do something with the microphone stream 
+    stopMicrophone()
+  }) 
+  .catch(function(error) { 
+    console.error("Error accessing microphone:", error); 
+  }); 
+ 
+// Stop the microphone 
+function stopMicrophone() { 
+  if (stream) { 
+    stream.getTracks().forEach(function(track) { 
+      track.stop(); 
+    }); 
+  } 
+} 
 
 pageOnloadHandler = (retry) => {
 
@@ -19,6 +41,17 @@ disconnected = (resp) => {
     document.getElementById("connect").disabled = false;
     document.getElementById("disconnect").disabled = true;
     document.getElementById("send").disabled = true;
+}
+
+microphoneStatus = (resp) => {
+
+    if (resp.micStatus === true) {
+        // Microphone is enabled
+        console.log("Microphone is enabled");
+        stopMicrophone()
+    } else if (resp.micStatus === false) {
+        // Microphone is disabled
+    }
 }
 
 handleMessage = (resp) => {
@@ -60,7 +93,8 @@ onFail: null,
         onBusy: null,
         onConnecting: null,
         onDisconnect: disconnected,
-        micStatus: null
+        micStatus: microphoneStatus,
+        onDisconnect: disconnected,
     }
 
 // id of video element to display avatar
