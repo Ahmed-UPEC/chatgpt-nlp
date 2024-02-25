@@ -1,6 +1,6 @@
 var trulience = null;
-var avatarId = "3987971816740702462"; //Default Avatar Id 10 = ECHO_TEST '3987971816740702462' = '10'
-
+//var avatarId = "3987971816740702462"; //Default Avatar Id 10 = ECHO_TEST '3987971816740702462' = '10'
+var avatarId = "10"; //Default Avatar Id 10 = ECHO_TEST '3987971816740702462' = '10'
 
 pageOnloadHandler = (retry) => {
 
@@ -10,7 +10,7 @@ pageOnloadHandler = (retry) => {
     
     mediaConnectHandler = (resp) => { 
         console.log("Media connected!");
-        trulience.setMicEnabled(false);
+        trulience.setMicEnabled(true);
     }
 
     mediaDisconnectHandler = (resp) => {
@@ -27,7 +27,13 @@ pageOnloadHandler = (retry) => {
 
             if (resp.sttResponse === true) {
                 // Received stt message.
-                console.log("Received STT Message - " + resp.messageArray[0].message);
+                const message = resp.messageArray[0].message;
+                console.log("Received STT Message - " + message);
+                const chatbox = document.getElementById('chat-input');
+                chatbox.value = message;
+                // send message
+                //document.getElementById('send-btn').click();
+                //trulience.sendMessageToVPS("Ok I got it");
             }
         }
     }
@@ -74,3 +80,4 @@ function endCall(reason) {
 function sendMessageToAvatar(msg) {
   trulience.sendMessageToVPS(msg);
 }
+
